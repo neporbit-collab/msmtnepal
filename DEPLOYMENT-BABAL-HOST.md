@@ -17,7 +17,7 @@ Babal.host’s setup guide describes Node applications in cPanel; exact interfac
 
 1. Create a private Git repository and push the reviewed source. Keep `.env*` secrets, backups, and production uploads out of Git.
 2. In **Setup Node.js App**, create an application with Node.js `22.23.2`.
-3. Set the application root to the Git deployment checkout (the directory containing `package.json`, `app.js`, and `.cpanel.yml`), or adapt `.cpanel.yml` if cPanel requires a separate destination.
+3. Set the application root to the Git deployment checkout (the directory containing `package.json`, `app.js`, and `.cpanel.yml`). For the current cPanel checkout path shown in File Manager, use `repositories/msmtnepal`. The deployment hook uses the same path.
 4. Map `msmtnepal.com` to the application using the host’s supported domain / Passenger configuration. Enable HTTPS and redirect HTTP to HTTPS.
 5. Set the startup file to `app.js`. The `start` script is `node app.js`; Passenger supplies the app port. Do not configure `public_html` as a static website directory for this Next.js/Payload server.
 6. Select Node.js `22.23.2`, run `npm ci`, and run `npm run build`. If using the checked-in Git hook, confirm it runs from the app root and has enough memory/disk first.
@@ -44,7 +44,7 @@ Check that `UPLOAD_DIR` survives app restarts and code deployments. Test uploadi
 
 ## 5. Configure Git deployment
 
-The included `.cpanel.yml` is tailored to this Node project. Its commands assume the checkout directory is also the application root, dependencies are installed with the committed npm lockfile, and the Passenger restart marker is supported:
+The included `.cpanel.yml` is tailored to this Node project. Its commands assume the checkout directory is also the application root at `~/repositories/msmtnepal`, dependencies are installed with the committed npm lockfile, and the Passenger restart marker is supported:
 
 1. Connect cPanel Git Version Control to the private repository.
 2. Keep `.cpanel.yml` at the repository root and ensure its deployment task is enabled.
