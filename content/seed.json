@@ -1,0 +1,19 @@
+{
+  "notice": "Review all claims and contact details before publication. No staff profiles or media stories were provided, so those collections intentionally start empty.",
+  "services": [
+    { "title": "Consultation with the company doctor", "slug": "company-doctor-consultation", "status": "confirm", "summary": "Consultation with the company doctor. Contact MSMT Nepal for current arrangements." },
+    { "title": "Nationwide medicine distribution", "slug": "medicine-distribution", "status": "current", "summary": "Medicine procurement and distribution supporting hospitals and community health services across Nepal." },
+    { "title": "Local clinic operations", "slug": "local-clinics", "status": "planned", "summary": "MSMT Nepal plans to operate local clinics. Details will be shared when the service is ready." },
+    { "title": "Retail pharmacy", "slug": "retail-pharmacy", "status": "confirm", "summary": "Listed as a new service in the brochure. Availability and access requirements need confirmation." },
+    { "title": "Doorstep medicine delivery", "slug": "doorstep-delivery", "status": "confirm", "summary": "Listed as a new service in the brochure. Locations and delivery arrangements need confirmation." },
+    { "title": "Aged care home", "slug": "aged-care-home", "status": "planned", "summary": "The brochure describes this initiative as being established. It is presented as planned until confirmed." }
+  ],
+  "metricsForReview": [
+    { "value": "20+", "label": "years of service", "verification": "Confirm figure and measurement date." },
+    { "value": "50+", "label": "partner hospitals and community clinics", "verification": "Confirm count, definition and permission to name partners." },
+    { "value": "70+", "label": "districts reached", "verification": "Confirm definition and measurement date." },
+    { "value": "100%", "label": "quality assurance program", "verification": "Confirm exact claim and supporting evidence before publication." }
+  ],
+  "qualityClaimsForReview": ["GMP-approved suppliers", "in-house quality assurance", "batch tracking and recall", "expiry management", "temperature-controlled storage and cold chain", "outside-laboratory validation", "ISO 9001:2015", "DDA-GSDP", "Government Guideline BS 2079"],
+  "contact": { "address": "Chakupat, Lalitpur-11, Nepal", "phones": ["+977 9768533691", "+977 9768533692"], "email": "msmt.ngo.nepal@gmail.com", "map": "https://www.google.com/maps/place/MSMT+Nepal/@27.6820149,85.3259575,18.13z" }
+}

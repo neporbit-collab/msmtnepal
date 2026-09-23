@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.env
+.env.*
+!.env.example
+public/uploads/**
+!public/uploads/.gitkeep
+*.log
+coverage/
+additionalinfo/
+_preview_assets/
