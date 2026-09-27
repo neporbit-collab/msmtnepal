@@ -5,6 +5,7 @@ const nextConfig = {
   images: { remotePatterns: [] },
   experimental: {
     webpackMemoryOptimizations: true,
+    preloadEntriesOnStart: false,
   },
 }
 
