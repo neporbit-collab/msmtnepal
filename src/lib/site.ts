@@ -25,9 +25,3 @@ export const services = [
   { title: 'Professional training and development', status: 'Current service', text: 'Workshops, policy dialogues and professional development for healthcare providers and administrators, including hospital and pharmaceutical management and good dispensing practice.', icon: '↗' },
   { title: 'Retail pharmacy', status: 'Confirm arrangements', text: 'The brochure lists a retail pharmacy for individuals with prescriptions. Contact MSMT Nepal for current availability and access details.', icon: '＋' },
 ]
-
-export const brochureMetrics = [
-  { value: '20+', label: 'years of service' },
-  { value: '50+', label: 'partner hospitals and community health clinics' },
-  { value: '70+', label: 'districts reached' },
-]
