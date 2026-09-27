@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - source "$HOME/nodevenv/repositories/msmtnepal/22/bin/activate" && cd "$HOME/repositories/msmtnepal" && npm ci && NODE_OPTIONS=--max-old-space-size=1536 npm run build && mkdir -p tmp && touch tmp/restart.txt
+    - source "$HOME/nodevenv/repositories/msmtnepal/22/bin/activate" && cd "$HOME/repositories/msmtnepal" && npm ci --no-audit --no-fund && test -s next-build.zip && rm -rf .next-incoming .next-previous && unzip -q next-build.zip -d .next-incoming && test -s .next-incoming/.next/BUILD_ID && if [ -d .next ]; then mv .next .next-previous; fi && mv .next-incoming/.next .next && mkdir -p tmp && touch tmp/restart.txt

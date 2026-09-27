@@ -1,0 +1,43 @@
+name: Build cPanel production artifact
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PAYLOAD_SECRET: ci-build-only-placeholder-not-for-runtime
+      NEXT_PUBLIC_SITE_URL: https://dev.msmtnepal.com
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.2
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Package production build
+        run: zip -qr next-build.zip .next
+
+      - name: Publish build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: msmtnepal-cpanel-build
+          path: next-build.zip
+          if-no-files-found: error
+          retention-days: 7

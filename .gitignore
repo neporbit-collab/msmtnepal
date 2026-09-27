@@ -1,5 +1,8 @@
 node_modules/
 .next/
+.next-incoming/
+.next-previous/
+next-build.zip
 tmp/
 .env
 .env.*
