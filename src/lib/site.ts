@@ -6,8 +6,8 @@ export const site = {
   address: 'Chakupat, Lalitpur-11, Nepal',
   phones: ['+977 9768533691', '+977 9768533692'],
   email: 'msmt.ngo.nepal@gmail.com',
-  map: 'https://www.google.com/maps/place/MSMT+Nepal/@27.6820149,85.3259575,18.13z',
-  mapEmbed: 'https://maps.google.com/maps?q=27.6820149,85.3259575&z=16&output=embed',
+  map: 'https://www.google.com/maps/place/MSMT+Nepal/@27.682152,85.326448,15z/data=!4m6!3m5!1s0x39eb19541b3ba3e3:0xbdb2771aeedc0c05!8m2!3d27.6821339!4d85.3264003!16s%2Fg%2F11smgqb2j6?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D',
+  mapEmbed: 'https://maps.google.com/maps?q=27.6821339,85.3264003&z=16&output=embed',
 }
 
 export const navigation = [
