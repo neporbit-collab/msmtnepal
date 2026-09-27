@@ -13,6 +13,7 @@ export const site = {
 export const navigation = [
   { label: 'Home', href: '/' }, { label: 'About', href: '/about' },
   { label: 'Our Team', href: '/our-team' }, { label: 'Services', href: '/services' },
+  { label: 'Notices', href: '/notices' },
   { label: 'Media', href: '/media' }, { label: 'Contact Us', href: '/contact' },
 ]
 
