@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
+import { isAdminOrEditor } from '@/access/isAdmin'
 export const SiteSettings: GlobalConfig = {
-  slug: 'site-settings', access: { read: () => true, update: ({ req }) => Boolean(req.user) },
+  slug: 'site-settings', access: { read: () => true, update: isAdminOrEditor },
   fields: [
     { name: 'organizationName', type: 'text', defaultValue: 'Medical Services Management Trust Nepal (MSMT Nepal)' },
     { name: 'address', type: 'text', defaultValue: 'Chakupat, Lalitpur-11, Nepal' },

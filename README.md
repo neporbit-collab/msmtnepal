@@ -25,9 +25,9 @@ The Payload config uses development schema push locally. Production uses migrati
 
 ## Site structure and content
 
-Public routes: `/`, `/about`, `/our-team`, `/services`, `/media`, and `/contact`. Published media items have detail pages at `/media/[slug]`. The CMS is at `/admin`.
+Public routes: `/`, `/about`, `/our-team`, `/services`, `/notices`, `/media`, and `/contact`. Published media items have detail pages at `/media/[slug]`. The CMS is at `/admin`.
 
-Payload collections: pages and reusable sections, services and statuses, team members, media items, uploads, users, and contact inquiries. Site-wide details are in the Site Settings global. Editors can edit content; only administrators can delete records or manage users. Editorial collections support drafts. The initial contact and service values are editable in `src/lib/site.ts` and `content/seed.json`.
+Payload collections: pages and reusable sections, services and statuses, team members, notices, media items, uploads, users, and contact inquiries. The Announcement pop-up global lets a publisher enable an image or text announcement, set optional dates, and add a link. Notices can be published from the CMS and appear on `/notices`; an enabled pop-up is shown once per browser session. Administrators manage users and can delete records. Editors manage general site content; publishers manage notices, pop-ups, uploads, and contact inquiries. Published services, team profiles, media, and notices are loaded dynamically from Payload when the database is configured. Page layouts and much of the homepage and About copy remain in the app code. Editorial collections support drafts.
 
 The supplied concept and planning brief had no staff names, biographies, approved photography, or approved media stories. Those collections start empty. The metrics and quality / certification references in `content/seed.json` are clearly marked for verification. No logo, partner logos, testimonials, or certification artwork are fabricated.
 
@@ -60,4 +60,4 @@ Follow [Babal.host cPanel deployment](DEPLOYMENT-BABAL-HOST.md). The included `.
 - Supply approved logo files, brand rules, staff profiles and consented photos, and approved media. Replace the CSS artwork with approved imagery as available.
 - Confirm editorial owners and inquiry handling workflow.
 
-No deployment, production login, repository commit, or remote push has been performed.
+The production app still needs a configured database, generated and applied migrations, persistent upload storage, and a successful build on the hosting environment before the CMS features can be used there.

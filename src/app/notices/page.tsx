@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { PageIntro } from '@/components/SiteChrome'
 import { NoticeList } from '@/components/NoticeList'
-import { notices } from '@/lib/notices'
+import { getPublicNotices } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Notices',
@@ -15,8 +15,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function NoticesPage() {
-  const latestFirst = [...notices].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+export const dynamic = 'force-dynamic'
+
+export default async function NoticesPage() {
+  const latestFirst = await getPublicNotices()
 
   return <>
     <PageIntro
@@ -26,7 +28,7 @@ export default function NoticesPage() {
     />
     <section className="content-section">
       <div className="container">
-        <NoticeList notices={latestFirst} />
+        {latestFirst.length ? <NoticeList notices={latestFirst} /> : <div className="media-empty"><h2>No current notices</h2><p>Please check back for updates from MSMT Nepal.</p></div>}
       </div>
     </section>
   </>

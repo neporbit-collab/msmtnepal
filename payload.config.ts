@@ -12,6 +12,8 @@ import { MediaItems } from './src/collections/MediaItems'
 import { Uploads } from './src/collections/Uploads'
 import { ContactInquiries } from './src/collections/ContactInquiries'
 import { SiteSettings } from './src/globals/SiteSettings'
+import { AnnouncementPopup } from './src/globals/AnnouncementPopup'
+import { Notices } from './src/collections/Notices'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -20,6 +22,6 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || '',
   admin: { user: Users.slug, importMap: { baseDir: process.cwd() } },
   editor: lexicalEditor(), db: postgresAdapter({ pool: { connectionString: process.env.DATABASE_URL || '' }, push: process.env.NODE_ENV !== 'production' }),
-  collections: [Users, Pages, Services, TeamMembers, MediaItems, Uploads, ContactInquiries], globals: [SiteSettings], sharp,
+  collections: [Users, Pages, Services, TeamMembers, MediaItems, Uploads, ContactInquiries, Notices], globals: [SiteSettings, AnnouncementPopup], sharp,
   typescript: { outputFile: path.resolve(dirname, 'src/payload-types.ts') },
 })

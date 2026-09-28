@@ -20,5 +20,5 @@ export const Users: CollectionConfig = {
     }
     return data
   }] },
-  fields: [{ name: 'role', type: 'select', required: true, defaultValue: 'editor', options: [{ label: 'Administrator', value: 'admin' }, { label: 'Editor', value: 'editor' }] }],
+  fields: [{ name: 'role', type: 'select', required: true, defaultValue: 'editor', options: [{ label: 'Administrator', value: 'admin' }, { label: 'Editor', value: 'editor' }, { label: 'Publisher', value: 'publisher' }] }],
 }
