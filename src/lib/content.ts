@@ -33,7 +33,7 @@ export async function getPublicServices(): Promise<PublicService[]> {
     const payload = await getPayloadOrNull()
     if (payload) {
     const result = await payload.find({ collection: 'services', where: { _status: { equals: 'published' } }, sort: 'displayOrder', limit: 50, draft: false })
-    if (result.docs.length) return result.docs.map(doc => ({ id: doc.id, title: doc.title, slug: doc.slug, status: doc.status, summary: doc.summary }))
+    if (result.docs.length) return result.docs.map(doc => ({ id: doc.id, title: doc.title, slug: doc.slug, status: doc.serviceStatus, summary: doc.summary }))
     }
   } catch (error) { console.error('Unable to load public services', error) }
   return fallbackServices.map((item, index) => ({ id: index, title: item.title, status: item.status === 'Current service' ? 'current' : item.status === 'Planned' ? 'planned' : 'confirm', summary: item.text }))
@@ -62,7 +62,9 @@ export async function getPublicNotices(): Promise<Notice[]> {
       where: { and: [{ _status: { equals: 'published' } }, { active: { equals: true } }] },
       sort: '-publishedAt', limit: 100, depth: 1, draft: false,
     })
-    return result.docs.flatMap(doc => {
+    if (result.docs.length === 0) return fallbackNotices
+
+      return result.docs.flatMap(doc => {
       const image = getUploadUrl(doc.image)
       if (!image) return []
       return [{ slug: doc.slug, title: doc.title, titleNative: doc.titleNative || undefined, summary: doc.summary,

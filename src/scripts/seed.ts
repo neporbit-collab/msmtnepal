@@ -5,7 +5,22 @@ import seed from '../../content/seed.json'
 const payload = await getPayload({ config })
 for (const service of seed.services) {
   const existing = await payload.find({ collection: 'services', where: { slug: { equals: service.slug } }, limit: 1, overrideAccess: true })
-  if (existing.totalDocs === 0) await payload.create({ collection: 'services', data: { ...service, _status: 'draft' }, overrideAccess: true })
+  if (existing.totalDocs === 0) await payload.create({
+    collection: 'services',
+    draft: true,
+    data: {
+      ...service,
+      serviceStatus:
+        service.status === 'Current service' || service.status === 'current'
+          ? 'current'
+          : service.status === 'Planned' || service.status === 'planned'
+            ? 'planned'
+            : 'confirm',
+      _status: 'draft',
+    },
+    overrideAccess: true,
+  })
+
 }
 const pages = [
   ['Home', 'home'], ['About', 'about'], ['Our Team', 'our-team'], ['Services', 'services'], ['Media', 'media'], ['Contact Us', 'contact'],
@@ -18,7 +33,7 @@ const settings = await payload.findGlobal({ slug: 'site-settings', overrideAcces
 if (!settings.metricsForReview?.length) {
   await payload.updateGlobal({ slug: 'site-settings', overrideAccess: true, data: {
     metricsForReview: seed.metricsForReview,
-    qualityClaimsForReview: seed.qualityClaimsForReview.map(claim => ({ claim, status: 'needs-review' })),
+    qualityClaimsForReview: seed.qualityClaimsForReview.map(claim => ({ claim, status: 'needs-review' as const, })),
     claimsReviewNote: 'Verify each figure, standards reference, scope and measurement date before publishing.',
     mapLink: seed.contact.map,
     address: seed.contact.address,

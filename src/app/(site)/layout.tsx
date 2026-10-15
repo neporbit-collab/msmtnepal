@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import './globals.css'
+import '../globals.css'
 import { Footer, Header } from '@/components/SiteChrome'
 import { AnnouncementPopup } from '@/components/AnnouncementPopup'
 import { getActiveAnnouncementPopup } from '@/lib/content'

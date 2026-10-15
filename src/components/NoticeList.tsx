@@ -3,22 +3,41 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Notice } from '@/lib/notices'
 
+
 function formatPublishedDate(value: string) {
-  return new Intl.DateTimeFormat('en-NP', {
+  const date = new Date(value)
+
+  if (Number.isNaN(date.getTime())) {
+    return value
+  }
+
+  return new Intl.DateTimeFormat('en', {
     dateStyle: 'long',
     timeZone: 'Asia/Kathmandu',
-  }).format(new Date(`${value}T00:00:00+05:45`))
+  }).format(date)
 }
+
 
 export function NoticeList({ notices }: { notices: Notice[] }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [activeNotice, setActiveNotice] = useState<Notice | null>(null)
 
+
   useEffect(() => {
-    if (activeNotice && dialogRef.current && !dialogRef.current.open) {
-      dialogRef.current.showModal()
+    if (!activeNotice || !dialogRef.current || dialogRef.current.open) {
+      return
+    }
+
+    const previousOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
+
+    dialogRef.current.showModal()
+
+    return () => {
+      document.documentElement.style.overflow = previousOverflow
     }
   }, [activeNotice])
+
 
   return <>
     <div className="notice-list">
