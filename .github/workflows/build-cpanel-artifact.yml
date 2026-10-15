@@ -1,6 +1,9 @@
+
 name: Build cPanel production artifact
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
@@ -13,8 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PAYLOAD_SECRET: ci-build-only-placeholder-not-for-runtime
-      NEXT_PUBLIC_SITE_URL: https://dev.msmtnepal.com
+      NEXT_PUBLIC_SITE_URL: https://msmtnepal.com
       NEXT_TELEMETRY_DISABLED: "1"
+
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -31,8 +35,42 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
-      - name: Package production build
-        run: zip -qr next-build.zip .next
+      - name: Assemble production package
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p deploy
+          cp -a .next/standalone/. deploy/
+
+          mkdir -p deploy/.next/static
+          cp -a .next/static/. deploy/.next/static/
+
+          if [ -d public ]; then
+            mkdir -p deploy/public
+            cp -a public/. deploy/public/
+          fi
+
+          cp -a src deploy/src
+          cp payload.config.ts tsconfig.json package.json package-lock.json deploy/
+
+          # Preserve the existing cPanel startup filename.
+          printf "import './server.js'\n" > deploy/app.js
+
+          # Install the complete production dependency set on Linux.
+          npm ci --prefix deploy --omit=dev --no-audit --no-fund
+
+          # Confirm that Payload's runtime and migration files are present.
+          test -f deploy/server.js
+          test -f deploy/app.js
+          test -f deploy/payload.config.ts
+          test -f deploy/src/migrations/index.ts
+          test -d deploy/node_modules/payload
+          test -d deploy/node_modules/@payloadcms/db-postgres
+          test -d deploy/.next/static
+
+          cd deploy
+          zip -qr ../next-build.zip .
 
       - name: Publish build artifact
         uses: actions/upload-artifact@v4

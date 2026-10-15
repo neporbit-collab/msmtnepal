@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isAdmin, isAdminOrPublisher, publishedOrStaff } from '@/access/isAdmin'
+import { isAdmin, isAdminOrEditor, isContentStaff, publishedOrStaff } from '@/access/isAdmin'
 
 export const Notices: CollectionConfig = {
   slug: 'notices',
@@ -7,9 +7,9 @@ export const Notices: CollectionConfig = {
   versions: { drafts: true },
   access: {
     read: publishedOrStaff,
-    create: isAdminOrPublisher,
-    update: isAdminOrPublisher,
-    delete: isAdmin,
+    create: isContentStaff,
+    update: isContentStaff,
+    delete: isAdminOrEditor,
   },
   fields: [
     { name: 'title', type: 'text', required: true },

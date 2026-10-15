@@ -1,10 +1,10 @@
 import type { GlobalConfig } from 'payload'
-import { isAdminOrPublisher } from '@/access/isAdmin'
+import { isContentStaff } from '@/access/isAdmin'
 
 export const AnnouncementPopup: GlobalConfig = {
   slug: 'announcement-popup',
   label: 'Announcement pop-up',
-  access: { read: () => true, update: isAdminOrPublisher },
+  access: { read: () => true, update: isContentStaff },
   fields: [
     { name: 'enabled', type: 'checkbox', defaultValue: false, label: 'Show announcement pop-up' },
     { name: 'title', type: 'text', admin: { condition: (_, siblingData) => Boolean(siblingData?.enabled) } },
